@@ -1,0 +1,102 @@
+#!/bin/sh
+mkdir /etc/shadowvpn-new
+
+
+sername=XXX
+serverip=X.X.X.X
+serport=XXXX
+vpngate=10.7.0
+vpnip=$vpngate.2
+tunnum=tunXXX
+serpasswd=XXXXXX
+sermtu=1432
+
+shadowvpn -c /etc/shadowvpn-new/$sername -s stop
+
+echo 33333
+sleep 3
+
+
+##############################################################################
+cat > /etc/shadowvpn-new/$sername.up <<EOF
+#!/bin/sh
+
+sysctl -w net.ipv4.ip_forward=1
+
+ip addr add $vpnip dev $tunnum
+ip link set $tunnum mtu $sermtu
+ip link set $tunnum up
+
+
+iptables -t nat -A POSTROUTING -o $tunnum -j MASQUERADE
+iptables -I FORWARD 1 -i $tunnum -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -I FORWARD 1 -o $tunnum -j ACCEPT
+
+
+#ip route add   0/1 dev $tunnum
+#ip route add 128/1 dev $tunnum
+
+echo $sername up done;echo $sername up done;echo $sername up done;
+
+EOF
+##############################################################################
+
+##############################################################################
+cat > /etc/shadowvpn-new/$sername.down <<EOF
+#!/bin/sh
+
+#sysctl -w net.ipv4.ip_forward=0
+
+iptables -t nat -D POSTROUTING -o $tunnum -j MASQUERADE
+iptables -D FORWARD -i $tunnum -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -D FORWARD -o $tunnum -j ACCEPT
+
+#ip route del   0/1
+#ip route del 128/1
+
+echo $sername down done;echo $sername down done;echo $sername down done;
+
+EOF
+##############################################################################
+
+
+##############################################################################
+cat > /etc/shadowvpn-new/$sername <<EOF
+
+server=$serverip
+port=$serport
+net=$vpnip
+intf=$tunnum
+password=$serpasswd
+mode=client
+concurrency=1
+mtu=$sermtu
+up=/etc/shadowvpn-new/$sername.up
+down=/etc/shadowvpn-new/$sername.down
+pidfile=/var/run/shadowvpn.$sername.pid
+logfile=/var/log/shadowvpn.$sername.log
+
+EOF
+##############################################################################
+
+
+##############################################################################
+cat > /root/cl.$sername <<EOF
+#!/bin/sh
+shadowvpn -c /etc/shadowvpn-new/$sername -s stop
+echo 333
+sleep 3
+shadowvpn -c /etc/shadowvpn-new/$sername -s start
+sleep 5
+ping $vpngate.1 -c 3 -W 1
+
+EOF
+##############################################################################
+sleep 1
+chmod 777 /root/cl.$sername;chmod 777 /etc/shadowvpn-new/*;
+
+shadowvpn -c /etc/shadowvpn-new/$sername -s start
+sleep 5
+ping $vpngate.1 -c 3 -W 1
+
+
