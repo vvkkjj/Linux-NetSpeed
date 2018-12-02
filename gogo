@@ -1,0 +1,34 @@
+
+
+cat > /root/net <<EOF
+netstat  -anplut
+EOF
+
+
+cat > /root/fhq <<EOF
+iptables -nxvL
+
+EOF
+
+
+cat > /root/ruisu <<EOF
+/appex/bin/serverSpeeder.sh status
+
+EOF
+
+cat > /root/ruisu <<EOF
+/appex/bin/serverSpeeder.sh status
+
+EOF
+
+
+cat > /root/ruisur <<EOF
+#/serverspeeder/bin/serverSpeeder.sh  stop
+/appex/bin/serverSpeeder.sh    stop 
+echo 3333333333
+sleep 3
+#/serverspeeder/bin/serverSpeeder.sh  start
+/appex/bin/serverSpeeder.sh    start 
+EOF
+chmod +x /root/ruisur
+wget -N --no-check-certificate "https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh
