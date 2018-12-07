@@ -1,5 +1,7 @@
 
-wget -N -O /usr/tinymapper_amd64 --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/tinymapper_amd64"
+#wget -N -O /usr/tinymapper_amd64 --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/tinymapper_amd64"
+curl -o /usr/tinymapper_amd64 "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/tinymapper_amd64"
+
 chmod 777 /usr/tinymapper_amd64
 
 ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe01
