@@ -1,0 +1,36 @@
+#!/bin/sh
+if [ -f "/tmp/checkftiny33.ps_status_check.lock" ]
+then
+        exit 0
+fi
+
+
+checkftiny33=`ps x|grep "tinymappe009"|grep -v "grep"`
+
+
+
+if [ -z "$checkftiny33" ]
+then
+        touch /tmp/checkftiny33.ps_status_check.lock
+        echo checkftiny33.ps_RECONNECT at: >> /tmp/checkftiny33.ps_status_check.log
+        date >> /tmp/checkftiny33.ps_status_check.log
+
+        sleep 1
+
+
+	tinymappe008  -l 0.0.0.0:1777 -r  xxxxx:1777 -u  &
+
+
+	sleep 3	
+		
+        rm /tmp/checkftiny33.ps_status_check.lock
+
+else
+        date > /tmp/checkftiny33.ps_status_check.log
+fi
+
+
+echo enddd
+
+
+
