@@ -42,7 +42,7 @@ ip route add $server via $(ip route show 0/0|grep -v tun | sed -e 's/.* via \([^
 # Shadow default route using two /1 subnets
 #ip route add   0/1 dev $intf
 #ip route add 128/1 dev $intf
-
+echo $(echo $)0 done
 #echo $0 done
 
 
@@ -67,7 +67,7 @@ iptables -D FORWARD -o $intf -j ACCEPT
 ip route del $serverip
 ip route del   0/1
 ip route del 128/1
-
+echo $(echo $)0 done
 #echo $0 done
 
 
