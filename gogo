@@ -3,18 +3,28 @@
 cat > /root/net <<EOF
 netstat  -anplut
 EOF
+cat > /root/nett <<EOF
+netstat -lnp
+
+EOF
 
 
 cat > /root/fhq <<EOF
 iptables -nxvL
+EOF
 
+cat > /root/fhqn <<EOF
+iptables -nxvL -t nat
+EOF
+cat > /root/fhqm <<EOF
+iptables -nxvL -t mangle
+EOF
+cat > /root/dnsr <<EOF
+service dnsmasq restart
 EOF
 
 
-cat > /root/ruisu <<EOF
-/appex/bin/serverSpeeder.sh status
 
-EOF
 
 cat > /root/ruisu <<EOF
 /appex/bin/serverSpeeder.sh status
@@ -31,11 +41,20 @@ sleep 3
 /appex/bin/serverSpeeder.sh    start 
 EOF
 chmod +x /root/ruisur
-wget -N --no-check-certificate "https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh
 
-wget -N --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/iproute_4.3.0-1ubuntu3.16.04.4_all.deb"
-wget -N --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/suanvv.deb"
-sleep 1
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/ser && chmod +x ser
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/cl && chmod +x cl
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tiny && chmod +x tiny
+
+
+
+
+
+curl  -O "https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh
+
+curl  -O "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/iproute_4.3.0-1ubuntu3.16.04.4_all.deb"
+curl  -O "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/suanvv.deb"
+sleep 2
 dpkg -i /root/iproute_4.3.0-1ubuntu3.16.04.4_all.deb
 sleep 1
 dpkg -i /root/suanvv.deb
