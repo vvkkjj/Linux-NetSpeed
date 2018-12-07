@@ -47,7 +47,9 @@ curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/cl && ch
 curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tiny && chmod +x tiny
 
 
-
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny1 && chmod +x checktiny1
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny2 && chmod +x checktiny2
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny3 && chmod +x checktiny3
 
 
 curl  -O "https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh
