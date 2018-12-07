@@ -61,7 +61,7 @@ wget -N --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/mas
 wget -N --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/suanvv.deb"
 sleep 2
 cp /root/suanvv.deb /root/shadowvpn_0.2.0-1_amd64.deb
-dpkg -i /root/iproute_4.3.0-1ubuntu3.16.04.4_all.deb
+#dpkg -i /root/iproute_4.3.0-1ubuntu3.16.04.4_all.deb
 sleep 1
 dpkg -i /root/shadowvpn_0.2.0-1_amd64.deb
 sleep 3
