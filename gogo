@@ -28,7 +28,7 @@ EOF
 
 cat > /root/ruisu <<EOF
 /appex/bin/serverSpeeder.sh status
-
+echo /appex/etc/config
 EOF
 
 
@@ -39,6 +39,9 @@ echo 3333333333
 sleep 3
 #/serverspeeder/bin/serverSpeeder.sh  start
 /appex/bin/serverSpeeder.sh    start 
+sleep 1
+/appex/bin/serverSpeeder.sh status
+echo /appex/etc/config
 EOF
 chmod +x /root/ruisur
 
