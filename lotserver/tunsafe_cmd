@@ -1,0 +1,1 @@
+使用这个版本的时候，在[Interface]下加上ListenPortTCP=<port>就可以用TCP方式监听端口，客户端使用Endpoint=tcp://<endpoint>:<port>即可用TCP方式连接
