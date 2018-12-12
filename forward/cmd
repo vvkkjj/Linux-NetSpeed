@@ -1,0 +1,6 @@
+
+
+sudo -u nobody -g nogroup  forward -l0.0.0.0:2xxx -rxxxxx:2xxx  -a 'abcd' > /dev/null &
+
+sudo -u nobody -g nogroup  forward -l 0.0.0.0:2xxx  -r xxxxx:xxxx -b 'abcd'  > /dev/null &
+
