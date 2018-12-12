@@ -1,0 +1,9 @@
+
+killall minivtun
+/usr/sbin/minivtun -l 0.0.0.0:xxxx  -a 10.xx.0.1/24  -e xxxxxxpasswd -m 1420 -n tun78 -t rc4 -d 
+
+
+
+killall minivtun
+/usr/sbin/minivtun -r serip:xxxx -a 10.xx.0.2/24 -e xxxxxxpasswd  -m 1420 -n tun78 -t rc4 -d
+
