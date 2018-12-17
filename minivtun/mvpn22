@@ -1,0 +1,51 @@
+
+su=$(echo `head -n 128 /dev/urandom | tr -dc "0123456789" | head -c2`)
+echo $su
+pport=97$su
+server=xxxxxxx
+serip=$server:$pport
+serlantou=10.78.44
+serlanip=$serlantou.88/24
+passw_d=xxxxxxx
+m_tu=1420
+t_un=tun44
+mvpn=minivtu02
+
+echo $serip
+killall $mvpn
+iptables -t nat -D POSTROUTING -o $t_un -j MASQUERADE
+iptables -D FORWARD -i $t_un -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -D FORWARD -o $t_un -j ACCEPT
+iptables -D INPUT -s $serlantou.0/24  -p tcp --dport 1:65535  -j DROP 
+iptables -D INPUT -s $serlantou.0/24  -p udp --dport 1:65535  -j DROP 
+iptables -D INPUT -s $serlantou.0/24  -p tcp --dport 1:65535  -j DROP 
+iptables -D INPUT -s $serlantou.0/24  -p udp --dport 1:65535  -j DROP 
+
+echo 333 ;sleep 3
+$mvpn -r $serip -a $serlanip -e $passw_d  -m $m_tu  -n $t_un  -t rc4 -d
+sleep 6
+
+iptables -t nat -A POSTROUTING -o $t_un  -j MASQUERADE
+iptables -I FORWARD 1 -i $t_un -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -I FORWARD 1 -o $t_un -j ACCEPT
+iptables -A INPUT -s $serlantou.0/24  -p tcp --dport 1:65535  -j DROP 
+iptables -A INPUT -s $serlantou.0/24  -p udp --dport 1:65535  -j DROP 
+
+
+sleep 3
+ping $serlantou.1 -c 3 -W 1
+
+echo eeendddd sleep 3 to via vvvpppnn
+echo eeendddd sleep 3 to via vvvpppnn
+echo eeendddd sleep 3 to via vvvpppnn
+sleep 3
+route add -net  139.199.0.0/16  gw   $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
+route add -net  14.20.0.0/16    gw   $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
+ip route add $server via $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
+ip route add   0/1 dev $t_un
+ip route add 128/1 dev $t_un
+
+
+
+
+
