@@ -1,0 +1,26 @@
+pport=xxxx
+passw_d=xxxxxxx
+t_un=tun44
+serlantou=10.78.44
+serlanip=$serlantou.1/24
+m_tu=1420
+mvpn=minivtun
+
+
+
+iptables -t nat -D  POSTROUTING -s $serlantou.0/24 ! -d $serlantou.0/24 -m comment --comment "mvp$t_un" -j MASQUERADE
+iptables -D FORWARD -s $serlantou.0/24 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -D FORWARD -d $serlantou.0/24 -j ACCEPT
+
+
+killall $mvpn
+echo 333
+sleep 3
+$mvpn -l 0.0.0.0:$pport  -a $serlanip  -e  $passw_d  -m $m_tu -n $t_un  -t rc4   -d 
+
+sleep 2
+iptables -t nat -A  POSTROUTING -s $serlantou.0/24 ! -d $serlantou.0/24 -m comment --comment "mvp$t_un" -j MASQUERADE
+iptables -A FORWARD -s $serlantou.0/24 -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A FORWARD -d $serlantou.0/24 -j ACCEPT
+
+
