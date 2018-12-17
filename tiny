@@ -29,6 +29,7 @@ ln -s  /usr/minivtun  /usr/bin/minivtu03
 ln -s  /usr/minivtun  /usr/bin/minivtu04
 ln -s  /usr/minivtun  /usr/bin/minivtu05
 ln -s  /usr/minivtun  /usr/bin/minivtu06
+ln -s  /usr/minivtun  /usr/bin/minivtu22
 
 chmod 777  /usr/minivtun
 
