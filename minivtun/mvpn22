@@ -9,7 +9,7 @@ serlanip=$serlantou.88/24
 passw_d=xxxxxxx
 m_tu=1420
 t_un=tun44
-mvpn=minivtu02
+mvpn=minivtu22
 
 echo $serip
 killall $mvpn
@@ -44,6 +44,8 @@ ip route add   0/1 dev $t_un
 ip route add 128/1 dev $t_un
 
 echo server=8.8.8.8 >/etc/dnsmasq.conf
+killall dnsmasq &
+sleep 1
 /etc/init.d/dnsmasq restart  &
 
 echo 5s to del via vvvppppnnn;echo 5s to del via vvvppppnnn;echo 5s to del via vvvppppnnn;
@@ -54,6 +56,9 @@ ip route delete $server
 route delete -net  14.20.0.0/16
 route delete -net  139.199.0.0/16
 echo server=114.114.114.114 >/etc/dnsmasq.conf
+echo server=119.29.29.29 >>/etc/dnsmasq.conf
+killall dnsmasq &
+sleep 1
 /etc/init.d/dnsmasq restart  &
 
 
