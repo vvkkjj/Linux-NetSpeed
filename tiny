@@ -21,7 +21,7 @@ ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe009
 
 
 
-wget -N -O  /usr/minivtun   https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/minivtun.ub.x64
+wget -N -O  /usr/minivtun   https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/min-ub.x64
 ln -s  /usr/minivtun  /usr/bin/minivtun
 ln -s  /usr/minivtun  /usr/bin/minivtu01
 ln -s  /usr/minivtun  /usr/bin/minivtu02
