@@ -32,3 +32,5 @@ ln -s  /usr/minivtun  /usr/bin/minivtu06
 
 chmod 777  /usr/minivtun
 
+https://github.com/vvkkjj/Linux-NetSpeed/blame/master/minivtun/mvpn22
+chmod 777  /root/mvpn22
