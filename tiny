@@ -36,6 +36,8 @@ chmod 777  /usr/minivtun
 curl  -O   https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/minivtun/mvpn22
 chmod 777  /root/mvpn22
 
+curl  -O   https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/minivtun/mvpnser
+chmod 777  /root/mvpnser
 
 
 #
