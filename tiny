@@ -32,7 +32,7 @@ ln -s  /usr/minivtun  /usr/bin/minivtu06
 
 chmod 777  /usr/minivtun
 
-curl  -O   /root/mvpn22  https://github.com/vvkkjj/Linux-NetSpeed/blame/master/minivtun/mvpn22
+curl  -O   https://github.com/vvkkjj/Linux-NetSpeed/blame/master/minivtun/mvpn22
 chmod 777  /root/mvpn22
 
 
