@@ -1,21 +1,19 @@
-wget http://update.aegis.aliyun.com/download/uninstall.sh
-chmod +x uninstall.sh
-./uninstall.sh
-wget http://update.aegis.aliyun.com/download/quartz_uninstall.sh
-chmod +x quartz_uninstall.sh
-./quartz_uninstall.sh
-
-删除残留
-
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/aliyun/u
+chmod +x u
+./u
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/aliyun/q
+chmod +x q
+./q
+#删除残留
 pkill aliyun-service
 rm -fr /etc/init.d/agentwatch /usr/sbin/aliyun-service
 rm -rf /usr/local/aegis*
 
 
-卸载后可以查看自己云服务器进程，已经没有了AliYunDun、aliyun-service、AliYunDunUpdate三项。
+#卸载后可以查看自己云服务器进程，已经没有了AliYunDun、aliyun-service、AliYunDunUpdate三项。
 
 
-2、屏蔽云盾IP。执行下面命令通过“iptables”防火墙来屏蔽云盾IP。
+#2、屏蔽云盾IP。执行下面命令通过“iptables”防火墙来屏蔽云盾IP。
 iptables -I INPUT -s 140.205.201.0/28 -j DROP
 iptables -I INPUT -s 140.205.201.16/29 -j DROP
 iptables -I INPUT -s 140.205.201.32/28 -j DROP
@@ -28,4 +26,4 @@ iptables -I INPUT -s 140.205.225.205/32 -j DROP
 iptables -I INPUT -s 140.205.225.195/32 -j DROP
 iptables -I INPUT -s 140.205.225.204/32 -j DROP
 
-或者直接通过web管理面板来屏蔽这些IP，下面蜗牛使用的是宝塔面板。
+#或者直接通过web管理面板来屏蔽这些IP，下面蜗牛使用的是宝塔面板。
