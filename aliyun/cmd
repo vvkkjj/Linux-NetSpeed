@@ -13,6 +13,41 @@ rm -rf /usr/local/aegis*
 #卸载后可以查看自己云服务器进程，已经没有了AliYunDun、aliyun-service、AliYunDunUpdate三项。
 
 
+systemctl stop accounts-daemon.service
+systemctl disable accounts-daemon.service
+systemctl stop aliyun-util.service
+systemctl disable aliyun-util.service
+systemctl stop cloud-config.service
+systemctl disable cloud-config.service
+systemctl stop cloud-final.service
+systemctl disable cloud-final.service
+systemctl stop cloud-init-local.service
+systemctl disable cloud-init-local.service
+systemctl stop cloud-init-upgrade.service
+systemctl disable cloud-init-upgrade.service
+systemctl stop cloud-init.service
+systemctl disable cloud-init.service
+
+
+rm /etc/systemd/system/aliyun-util.service
+rm -rf /etc/aliyun-util
+rm /lib/systemd/system/accounts-daemon.service
+rm /lib/systemd/system/cloud-final.service
+rm /lib/systemd/system/cloud-config.target
+rm /lib/systemd/system/cloud-init.service
+rm /lib/systemd/system/cloud-config.service
+rm /lib/systemd/system/cloud-init-upgrade.service
+rm /lib/systemd/system/cloud-init-local.service
+
+
+
+
+
+
+
+
+
+
 #2、屏蔽云盾IP。执行下面命令通过“iptables”防火墙来屏蔽云盾IP。
 iptables -I INPUT -s 140.205.201.0/28 -j DROP
 iptables -I INPUT -s 140.205.201.16/29 -j DROP
@@ -33,3 +68,17 @@ iptables -I INPUT -s 106.11.228.0/22 -j DROP
 
 
 #或者直接通过web管理面板来屏蔽这些IP，下面蜗牛使用的是宝塔面板。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
