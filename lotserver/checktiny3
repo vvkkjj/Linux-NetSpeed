@@ -18,7 +18,7 @@ then
         sleep 1
 
 
-	tinymappe008  -l 0.0.0.0:1777 -r  xxxxx:1777 -u  &
+	sudo -u nobody -g nogroup tinymappe008  -l 0.0.0.0:1777 -r  xxxxx:1777 -u  &
 
 
 	sleep 3	
