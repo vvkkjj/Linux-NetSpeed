@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+
+
+#default=allip=0.0.0.0/0
+srcip=0.0.0.0/0
+
+##########################################################
+##change for your setting
+##########################################################
+######tcp or udp
+mode=tcp
+
+######vpn lan local ip
+localip=10.0.202.2
+
+######startport must smaller than endport
+localport_start=30000
+localport___end=30003
+
+######vpn lan remote ip
+remoteip=10.0.202.1
+##########################################################
+
+localport_rate=$localport_start:$localport___end
+remoteport_rate=$localport_start-$localport___end
+
+
+echo $localport_rate----$remoteport_rate
+
+
+
+iptables -t nat -D PREROUTING -s  $srcip    -p  $mode --dport $localport_rate  -j DNAT --to-destination  $remoteip:$remoteport_rate  
+iptables -t nat -D POSTROUTING -p  $mode  -d  $remoteip --dport   $localport_rate  -j SNAT --to-source  $localip  
+
+echo finished del old iptables,wait 3s to add new one,or you can CTRL+C and make a new setting;
+sleep 3
+iptables -t nat -I PREROUTING -s  $srcip    -p  $mode --dport $localport_rate  -j DNAT --to-destination  $remoteip:$remoteport_rate
+iptables -t nat -I POSTROUTING -p  $mode  -d  $remoteip --dport   $localport_rate  -j SNAT --to-source  $localip
