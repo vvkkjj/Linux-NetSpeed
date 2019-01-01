@@ -1,0 +1,25 @@
+#!/bin/sh
+
+####iptables -F -t nat
+#
+mode=udp
+
+#default=0.0.0.0/0
+srcip=0.0.0.0/0
+
+localip=XXXXXXXXX
+localport=27777
+
+
+remoteip=XXXXXXXXXX
+remoteport=2002
+
+iptables -t nat -D PREROUTING -s  $srcip    -p  $mode --dport $localport  -j DNAT --to-destination  $remoteip:$remoteport
+iptables -t nat -D POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport  -j SNAT --to-source  $localip
+echo finished del old iptables,wait 3s to add new one,or you can CTRL+C and make a new setting;
+sleep 3
+
+iptables -t nat -I PREROUTING -s  $srcip    -p  $mode --dport $localport  -j DNAT --to-destination  $remoteip:$remoteport
+iptables -t nat -I POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport  -j SNAT --to-source  $localip
+
+
