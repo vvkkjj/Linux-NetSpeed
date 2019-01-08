@@ -66,6 +66,11 @@ iptables -I INPUT -s 106.11.222.0/23 -j DROP
 iptables -I INPUT -s 106.11.224.0/24 -j DROP
 iptables -I INPUT -s 106.11.228.0/22 -j DROP
 
+iptables -I INPUT -s 106.11.248.0/24 -j DROP
+iptables -I INPUT -s 100.100.100.0/24 -j DROP
+#dont know
+iptables -I INPUT -s 182.106.155.0/24 -j DROP
+
 
 #或者直接通过web管理面板来屏蔽这些IP，下面蜗牛使用的是宝塔面板。
 
