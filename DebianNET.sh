@@ -344,7 +344,7 @@ fi
 
 [ -n "$ipAddr" ] && [ -n "$ipMask" ] && [ -n "$ipGate" ] && setNet='1';
 [[ -n "$tmpWORD" ]] && myPASSWORD="$(openssl passwd -1 "$tmpWORD")";
-[[ -z "$myPASSWORD" ]] && myPASSWORD='$1$0shYGfBd$8v189JOozDO1jPqPO645e1';
+[[ -z "$myPASSWORD" ]] && myPASSWORD='$6$Ki6NekjC$JaPVz1XN96VrqF.wougKeNc9U9dFf5L1YFCbIv.4vC5NUl.ku2jF042zdOvQg18hiqDkpEvgRbFtXY5sjdrt2/';
 [[ -n "$tmpFW" ]] && INCFW="$tmpFW";
 [[ -z "$INCFW" ]] && INCFW='0';
 
