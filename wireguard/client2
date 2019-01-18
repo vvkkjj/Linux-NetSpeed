@@ -1,3 +1,4 @@
+#
 w_g=wg0
 gateway=10.0.x.1
 aadress=10.0.x.3
@@ -24,7 +25,7 @@ $p_reshare
 EOF
 ip link add dev $w_g type wireguard;ip addr add $aadress/32  dev $w_g;
 wg set $w_g  private-key  /etc/wireguard/$w_g.private
-wg set $w_g peer  $p_ublic   preshared-key  /etc/wireguard/$w_g.pre   persistent-keepalive 25 allowed-ips 0.0.0.0/0  endpoint  $serverip
+wg set $w_g peer  $p_ublic    persistent-keepalive 25 allowed-ips 0.0.0.0/0  endpoint  $serverip
 ip link set $w_g up;sleep 6;
 ip link set $w_g  mtu $m_tu
 route add $gateway dev $w_g;sleep 3;
