@@ -1,4 +1,4 @@
-#
+#!/bin/sh
 w_g=wg0
 gateway=10.0.x.1
 aadress=10.0.x.3
