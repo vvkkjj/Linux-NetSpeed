@@ -1,0 +1,36 @@
+w_g=wg0
+gateway=10.0.x.1
+aadress=10.0.x.3
+serverip=120.79.100.170:2004
+m_tu=1420
+p_rivate=xxxxxxxxxxxxxxxxxxxx
+p_ublic=yyyyyyyyyyyyyyyyy
+
+
+ip link set $w_g down
+ip link delete  dev $w_g type wireguard
+iptables -t nat -D POSTROUTING -o $w_g -j MASQUERADE
+iptables -D FORWARD -i $w_g -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -D FORWARD -o $w_g -j ACCEPT
+echo 333
+sleep 3
+mkdir /etc/wireguard/  &
+sleep 1
+cat > /etc/wireguard/$w_g.private<<EOF
+$p_rivate
+EOF
+cat > /etc/wireguard/$w_g.pre<<EOF
+$p_reshare
+EOF
+ip link add dev $w_g type wireguard;ip addr add $aadress/32  dev $w_g;
+wg set $w_g  private-key  /etc/wireguard/$w_g.private
+wg set $w_g peer  $p_ublic   preshared-key  /etc/wireguard/$w_g.pre   persistent-keepalive 25 allowed-ips 0.0.0.0/0  endpoint  $serverip
+ip link set $w_g up;sleep 6;
+ip link set $w_g  mtu $m_tu
+route add $gateway dev $w_g;sleep 3;
+iptables -t nat -A POSTROUTING -o $w_g  -j MASQUERADE
+iptables -I FORWARD 1 -i $w_g -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -I FORWARD 1 -o $w_g -j ACCEPT
+ping $gateway -c 3 -W 1
+route delete -net  10.0.0.0/8 dev $w_g
+
