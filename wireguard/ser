@@ -1,0 +1,35 @@
+######################################################################################
+#wg set##wg genkey | tee server_privatekey | wg pubkey > server_publickey
+######################################################################################
+#n_et=`cat /proc/net/dev |awk -F: 'function trim(str){sub(/^[ \t]*/,"",str); sub(/[ \t]*$/,"",str); return str } NR>2 {print trim($1)}'  |grep -Ev '^lo|^sit|^stf|^gif|^dummy|^vmnet|^vir|^gre|^ipip|^ppp|^bond|^tun|^wg|^tap|^ip6gre|^ip6tnl|^teql|^venet' |awk 'NR==1 {print $0}'`
+w_g=tunwg
+adress_front=10.0.208
+
+
+cat > /root/wgr <<EOF
+wg-quick down  $w_g;echo 2222;sleep 3;wg-quick up $w_g;
+EOF
+cat /root/wgr
+
+cat > /etc/wireguard/$w_g.conf <<EOF
+[Interface]
+Address = $adress_front.1/24
+MTU = 1420
+ListenPort = 2002
+PrivateKey = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+PostUp =   iptables -t nat -A  POSTROUTING -s $adress_front.0/24 ! -d $adress_front.0/24 -m comment --comment "$w_g" -j MASQUERADE;iptables -A FORWARD -s $adress_front.0/24 -m state --state RELATED,ESTABLISHED -j ACCEPT;iptables -A FORWARD -d $adress_front.0/24 -j ACCEPT
+PostDown = iptables -t nat -D  POSTROUTING -s $adress_front.0/24 ! -d $adress_front.0/24 -m comment --comment "$w_g" -j MASQUERADE;iptables -D FORWARD -s $adress_front.0/24 -m state --state RELATED,ESTABLISHED -j ACCEPT;iptables -D FORWARD -d $adress_front.0/24 -j ACCEPT
+
+[Peer]
+PublicKey = yyyyyyyyyyyyyyyyyyyyyyyyyyy
+AllowedIPs = $adress_front.2/32
+Endpoint = 11.11.11.11:22232
+
+
+EOF
+echo 1111111111111111111111111111111111111111111111111111
+cat /etc/wireguard/$w_g.conf
+cat /root/wgr
+chmod 777 /root/wgr
+######################################################################################
+#wg set
