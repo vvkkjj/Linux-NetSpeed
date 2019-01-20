@@ -1,1 +1,7 @@
-1
+wget -N -O /usr/speeder  "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/speederv2/speederv2_amd64"
+
+ln -s /usr/speeder /usr/bin/speeder01
+ln -s /usr/speeder /usr/bin/speeder02
+ln -s /usr/speeder /usr/bin/speeder03
+ln -s /usr/speeder /usr/bin/speeder04
+ln -s /usr/speeder /usr/bin/speeder05
