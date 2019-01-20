@@ -1,5 +1,6 @@
 wget -N -O /usr/speeder  "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/speederv2/speederv2_amd64"
-
+sleep 1
+chmod 755  /usr/speeder
 ln -s /usr/speeder /usr/bin/speeder01
 ln -s /usr/speeder /usr/bin/speeder02
 ln -s /usr/speeder /usr/bin/speeder03
