@@ -23,3 +23,12 @@ iptables -t nat -I PREROUTING -s  $srcip    -p  $mode --dport $localport  -j DNA
 iptables -t nat -I POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport  -j SNAT --to-source  $localip
 
 
+
+
+
+
+echo sucess
+echo sucess
+echo sucess
+echo sucess
+
