@@ -1,0 +1,37 @@
+#!/bin/sh
+
+tunname=tun7
+
+
+check_peer_activity() {
+  local iface=$1
+  local public_key=$2
+  last_handshake=`wg show ${iface} latest-handshakes | grep ${public_key} | awk '{print $2}'`
+  allowed_ips=`wg show $tunname allowed-ips | grep ${public_key} | awk '{print $2}'`
+  transfer_=`wg show $tunname transfer|grep ${public_key} | awk '{print $2,$3}' `
+  [ -z ${last_handshake} ] && return 0;
+  [ ${last_handshake} -eq "0" ] && return 0;
+  idle_seconds=$((`date +%s`-${last_handshake}))
+
+  [ ${idle_seconds} -lt 200 ]  && logger -st $allowed_ips connecting time=$idle_seconds transfer=$transfer_;
+  [ ${idle_seconds} -lt 200 ]  && return 0;
+  
+  #wg set ${iface} peer ${public_key} remove
+  #wg set ${iface} peer ${public_key} allowed-ips ${allowed_ips}
+  
+  logger -st $allowed_ips time out time=$idle_seconds;
+  
+  #logger -st wireguard_watchdog ${iface} peer ${public_key} has been reset
+}
+
+check_peers() {
+  local iface=$1
+  peers=`wg show ${iface} peers`
+  for public_key in ${peers}; do
+    check_peer_activity ${iface} ${public_key}
+    #logger -st wireguard_watchdog ${iface} peer ${public_key} checked
+  done
+}
+
+check_peers tun7
+
