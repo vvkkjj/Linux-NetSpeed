@@ -25,3 +25,5 @@ check_peers() {
     logger -st wireguard_watchdog ${iface} peer ${public_key} checked
   done
 }
+
+check_peers tun7
