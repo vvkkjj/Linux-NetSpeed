@@ -20,3 +20,16 @@ cdr2mask ()
 # examples:
 mask2cdr 255.255.255.0
 cdr2mask 24
+
+
+apt-get install netmask
+转换为ip地址/子网掩码格式  
+$ cat 2.txt | xargs netmask -s
+        1.0.1.0/255.255.255.0  
+        1.0.2.0/255.255.254.0  
+        1.0.8.0/255.255.248.0  
+ 
+转换到CIDR格式
+$ cat 2.txt | xargs netmask -c
+        1.0.1.0/24
+        1.0.2.0/23
