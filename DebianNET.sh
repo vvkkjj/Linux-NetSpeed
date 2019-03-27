@@ -21,10 +21,12 @@ export linuxdists=''
 export ddMode='0'
 export setNet='0'
 export setRDP='0'
+export setIPv6='0'
 export isMirror='0'
 export FindDists='0'
 export loaderMode='0'
 export SpikCheckDIST='0'
+export setInterfaceName='0'
 export UNKNOWHW='0'
 export UNVER='6.4'
 
@@ -84,6 +86,10 @@ while [[ $# -ge 1 ]]; do
       ipGate="$1"
       shift
       ;;
+    --dev-net)
+      shift
+      setInterfaceName='1'
+      ;;
     --loader)
       shift
       loaderMode='1'
@@ -121,6 +127,10 @@ while [[ $# -ge 1 ]]; do
     --firmware)
       shift
       tmpFW='1'
+      ;;
+    --ipv6)
+      shift
+      setIPv6='1'
       ;;
     *)
       if [[ "$1" != 'error' ]]; then echo -ne "\nInvaild option: '$1'\n\n"; fi
@@ -220,7 +230,7 @@ if [[ "$isMirror" == '1' ]]; then
 fi
 
 if [[ -z "$DISTMirror" ]]; then
-  [[ "$linuxdists" == 'debian' ]] && MirrorHost='deb.debian.org' && MirrorFolder='/debian' && DISTMirror="${MirrorHost}${MirrorFolder}";
+  [[ "$linuxdists" == 'debian' ]] && MirrorHost='snapshot.debian.org' && MirrorFolder='/archive/debian/20190321T212815Z' && DISTMirror="${MirrorHost}${MirrorFolder}";
   [[ "$linuxdists" == 'ubuntu' ]] && MirrorHost='archive.ubuntu.com' && MirrorFolder='/ubuntu' && DISTMirror="${MirrorHost}${MirrorFolder}";
   [[ "$linuxdists" == 'centos' ]] && DISTMirror='vault.centos.org';
 fi
@@ -247,6 +257,7 @@ if [[ -n "$tmpPrefer" ]]; then
   PreferOption="$(echo "$tmpPrefer" |sed 's/[[:space:]]*//g')"
 fi
 
+PreferOption='current';
 if [[ -z "$PreferOption" ]]; then
   PreferOption='current';
 fi
@@ -325,7 +336,7 @@ if [[ "$SpikCheckDIST" == '0' ]]; then
 fi
 
 [[ "$ddMode" == '1' ]] && {
-  export SSL_SUPPORT='https://moeclub.org11/get-wget_udeb_amd64';
+  export SSL_SUPPORT='https://moeclub.org/111get/wget_udeb_amd64';
   if [[ -n "$tmpURL" ]]; then
     DDURL="$tmpURL"
     echo "$DDURL" |grep -q '^http://\|^ftp://\|^https://';
@@ -397,7 +408,7 @@ if [[ "$linuxdists" == 'centos' ]]; then
     fi
     awk 'BEGIN{print '${UNVER}'-'${DIST}'+0.59}' |grep -q '^-'
     if [ $? == '0' ]; then
-      echo -en "\n\033[31mThe version higher then \033[33m6.9 \033[31mis not support in current! \033[0m\n\n"
+      echo -en "\n\033[31mThe version higher then \033[33m6.10 \033[31mis not support in current! \033[0m\n\n"
       exit 1;
     fi
   fi
@@ -560,10 +571,20 @@ LinuxKernel="$(grep 'linux.*/\|kernel.*/' /tmp/grub.new |awk '{print $1}' |head 
 LinuxIMG="$(grep 'initrd.*/' /tmp/grub.new |awk '{print $1}' |tail -n 1)";
 [ -z "$LinuxIMG" ] && sed -i "/$LinuxKernel.*\//a\\\tinitrd\ \/" /tmp/grub.new && LinuxIMG='initrd';
 
+if [[ "$setInterfaceName" == "1" ]]; then
+  Add_OPTION="net.ifnames=0 biosdevname=0";
+else
+  Add_OPTION="";
+fi
+
+if [[ "$setIPv6" == "1" ]]; then
+  Add_OPTION="$Add_OPTION ipv6.disable=1";
+fi
+
 if [[ "$linuxdists" == 'debian' ]] || [[ "$linuxdists" == 'ubuntu' ]]; then
-  BOOT_OPTION="auto=true hostname=$linuxdists domain= -- quiet"
+  BOOT_OPTION="auto=true $Add_OPTION hostname=$linuxdists domain= -- quiet"
 elif [[ "$linuxdists" == 'centos' ]]; then
-  BOOT_OPTION="ks=file://ks.cfg ksdevice=$IFETH"
+  BOOT_OPTION="ks=file://ks.cfg $Add_OPTION ksdevice=$IFETH"
 fi
 
 [[ "$Type" == 'InBoot' ]] && {
