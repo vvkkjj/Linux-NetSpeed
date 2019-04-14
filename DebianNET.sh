@@ -213,7 +213,7 @@ if [[ "$isMirror" == '1' ]]; then
     else
       echo -en "\n\033[31mInvaild Mirror! \033[0m\n";
       [[ "$linuxdists" == 'debian' ]] && echo -en "\033[33mexample:\033[0m http://deb.debian.org/debian\n\n";
-      [[ "$linuxdists" == 'ubuntu' ]] && echo -en "\033[33mexample:\033[0m http://archive.ubuntu.com/ubuntu\n\n";
+      [[ "$linuxdists" == 'ubuntu' ]] && echo -en "\033[33mexample:\033[0m http://ftp.tecnoera.com/ubuntu\n\n";
       [[ "$linuxdists" == 'centos' ]] && echo -en "\033[33mexample:\033[0m http://mirror.centos.org/centos\n\n";
       exit 1
     fi
