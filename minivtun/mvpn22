@@ -16,10 +16,10 @@ killall $mvpn
 iptables -t nat -D POSTROUTING -o $t_un -j MASQUERADE
 iptables -D FORWARD -i $t_un -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -D FORWARD -o $t_un -j ACCEPT
-iptables -D INPUT -s $serlantou.0/24  -p tcp --dport 1:65535  -j DROP 
-iptables -D INPUT -s $serlantou.0/24  -p udp --dport 1:65535  -j DROP 
-iptables -D INPUT -s $serlantou.0/24  -p tcp --dport 1:65535  -j DROP 
-iptables -D INPUT -s $serlantou.0/24  -p udp --dport 1:65535  -j DROP 
+iptables -D INPUT -s $serlantou.0/24  -p tcp --dport 1:5535  -j DROP 
+iptables -D INPUT -s $serlantou.0/24  -p udp --dport 1:5535  -j DROP 
+iptables -D INPUT -s $serlantou.0/24  -p tcp --dport 1:5535  -j DROP 
+iptables -D INPUT -s $serlantou.0/24  -p udp --dport 1:5535  -j DROP 
 
 echo 333 ;sleep 3
 $mvpn -r $serip -a $serlanip -e $passw_d  -m $m_tu  -n $t_un  -t rc4 -d
@@ -28,8 +28,8 @@ sleep 6
 iptables -t nat -A POSTROUTING -o $t_un  -j MASQUERADE
 iptables -I FORWARD 1 -i $t_un -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -I FORWARD 1 -o $t_un -j ACCEPT
-iptables -A INPUT -s $serlantou.0/24  -p tcp --dport 1:65535  -j DROP 
-iptables -A INPUT -s $serlantou.0/24  -p udp --dport 1:65535  -j DROP 
+iptables -A INPUT -s $serlantou.0/24  -p tcp --dport 1:5535  -j DROP 
+iptables -A INPUT -s $serlantou.0/24  -p udp --dport 1:5535  -j DROP 
 
 
 sleep 3
