@@ -40,6 +40,7 @@ sleep 3
 route add -net  139.199.0.0/16  gw   $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
 route add -net  14.20.0.0/16    gw   $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
 route add -net  47.106.0.0/16    gw   $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
+route add -net  120.79.0.0/16    gw   $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
 
 
 ip route add $server via $(ip route show 0/0 | sed -e 's/.* via \([^ ]*\).*/\1/')
@@ -59,6 +60,7 @@ ip route delete $server
 route delete -net  14.20.0.0/16
 route delete -net  139.199.0.0/16
 route delete -net  47.106.0.0/16
+route delete -net  120.79.0.0/16
 
 echo server=114.114.114.114 >/etc/dnsmasq.conf
 echo server=119.29.29.29 >>/etc/dnsmasq.conf
