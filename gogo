@@ -82,7 +82,7 @@ sleep 2
 #cp /root/suanvv.deb /root/shadowvpn_0.2.0-1_amd64.deb
 #dpkg -i /root/iproute_4.3.0-1ubuntu3.16.04.4_all.deb
 sleep 1
-dpkg -i /root/suanvv.deb
+#dpkg -i /root/suanvv.deb
 sleep 3
 /etc/init.d/shadowvpn stop
 mv /etc/init.d/shadowvpn  /etc/init.d/shadowvpn-
