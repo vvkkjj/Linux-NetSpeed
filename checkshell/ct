@@ -8,7 +8,7 @@ fi
 portt=1777
 rip=8.8.8.8
 rpo=53
-tu="-t -u"
+tu="-u"
 checktiny1=`ps x|grep "tinymappe007 -l 0.0.0.0:$portt "|grep -v "grep"`
 if [ -z "$checktiny1" ]
 then
