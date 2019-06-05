@@ -4,7 +4,7 @@ then
         exit 0
 fi
 
-############################################################################################
+##--------------------------------------------------------------------------------####
 portt=1777
 rip=8.8.8.8
 rpo=53
@@ -16,10 +16,10 @@ then
   echo checktiny1.ps_RECONNECT port:$portt at: >> /tmp/checktiny1.ps_status_check.log
   date >> /tmp/checktiny1.ps_status_check.log
 	
-  sudo -u nobody -g nogroup tinymappe007 -l 0.0.0.0:$portt -r $rip:$rpo $tu >/dev/null &
+  sudo -u nobody -g nogroup tinymappe007 -l 0.0.0.0:$portt -r $rip:$rpo  $tu  >/dev/null &
   rm /tmp/checktiny1.ps_status_check.lock
 fi
+###########################################################################################
 
 
-
-exit 0;exit 0;exit 0;exit 0;
+exit 0;## echo     */1 * * * * /root/ct
