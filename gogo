@@ -50,22 +50,24 @@ curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/cl && ch
 curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tiny && chmod +x tiny
 
 
-curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny1 && chmod +x checktiny1
-curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny2 && chmod +x checktiny2
-curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny3 && chmod +x checktiny3
-
+#curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny1 && chmod +x checktiny1
+#curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny2 && chmod +x checktiny2
+#curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny3 && chmod +x checktiny3
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/checkshell/ct && chmod +x ct
 
 curl  -O "https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh
 
 #wget -N --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/iproute_4.3.0-1ubuntu3.16.04.4_all.deb"
 #wget -N --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/suanvv.deb"
-wget -N  "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/iproute_4.3.0-1ubuntu3.16.04.4_all.deb"
+#wget -N  "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/iproute_4.3.0-1ubuntu3.16.04.4_all.deb"
 wget -N  "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/suanvv.deb"
 
 
 wget -N  "https://raw.githubusercontent.com/vvkkjj/UDPping/master/udpping.py"
+chmod 755 /root/udpping.py
 cp /root/udpping.py /usr/bin/udpping
-chmod 755  /usr/bin/udpping
+
+
 
 echo "socat -v UDP-LISTEN:4000,fork PIPE" > /root/udpping
 echo    ./udpping 44.55.66.77 4000 >> /root/udpping
@@ -74,7 +76,36 @@ echo    ./udpping 44.55.66.77 4000 "LEN=400;INTERVAL=2000"  >> /root/udpping
 
 
 
+wget -N -O /usr/tinymapper_amd64  "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/tinymapper_amd64"
+chmod 755 /usr/tinymapper_amd64
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe01
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe02
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe03
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe04
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe05
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe06
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe007
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe008
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe009
 
+
+wget -N -O  /usr/minivtun   https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/min-ub.x64
+chmod 755  /usr/minivtun
+ln -s  /usr/minivtun  /usr/bin/minivtun
+ln -s  /usr/minivtun  /usr/bin/minivtu01
+ln -s  /usr/minivtun  /usr/bin/minivtu02
+ln -s  /usr/minivtun  /usr/bin/minivtu03
+ln -s  /usr/minivtun  /usr/bin/minivtu04
+ln -s  /usr/minivtun  /usr/bin/minivtu05
+ln -s  /usr/minivtun  /usr/bin/minivtu06
+ln -s  /usr/minivtun  /usr/bin/minivtu22
+
+
+curl  -O   https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/minivtun/mvpn22
+chmod 755  /root/mvpn22
+
+curl  -O   https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/minivtun/mvpnser
+chmod 755 /root/mvpnser
 
 
 
@@ -87,6 +118,9 @@ sleep 3
 /etc/init.d/shadowvpn stop
 mv /etc/init.d/shadowvpn  /etc/init.d/shadowvpn-
 /etc/init.d/shadowvpn start
+
+
+
 
 
 echo eeeeeeeeeenddddddddddddddddddd
