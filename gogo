@@ -55,6 +55,10 @@ curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tiny && 
 #curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/lotserver/checktiny3 && chmod +x checktiny3
 curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/checkshell/ct && chmod +x ct
 
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/checkshell/zfdan && chmod +x zfdan
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/checkshell/zffan && chmod +x zffan
+
+
 curl  -O "https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh
 
 #wget -N --no-check-certificate "https://github.com/vvkkjj/Linux-NetSpeed/raw/master/bbr/iproute_4.3.0-1ubuntu3.16.04.4_all.deb"
