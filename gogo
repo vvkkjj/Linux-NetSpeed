@@ -1,4 +1,13 @@
 
+ln -s /usr/sbin/dnsmasq /usr/sbin/dns1masq
+
+cat > /etc/22dnsmasq.conf <<EOF
+no-resolv
+port=1777
+server=208.67.222.222
+server=8.8.4.4
+EOF
+
 
 cat > /root/net <<EOF
 netstat  -anplut
