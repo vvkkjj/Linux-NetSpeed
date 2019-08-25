@@ -6,8 +6,8 @@ route -n |grep 10.0.0.0 |grep $kip || route delete  -net 10.0.0.0/8
 route -n |grep 10.0.0.0 |grep $kip || route delete  -net 10.0.0.0/8 
 route -n |grep 10.0.0.0 |grep $kip || route add -net 10.0.0.0/8 gw $kip metric 88
 
-iptables -nvL -t nat |grep $kip|grep 5359  || iptables -t nat -I PREROUTING -s  $kip  -p udp --dport 53 -j REDIRECT --to-ports 5359
-iptables -nvL -t nat |grep $kip|grep 5359  || iptables -t nat -I PREROUTING -s  $kip  -p tcp --dport 53 -j REDIRECT --to-ports 5359
+iptables -nvL -t nat |grep $kip|grep 5359|grep udp  || iptables -t nat -I PREROUTING -s  $kip  -p udp --dport 53 -j REDIRECT --to-ports 5359
+iptables -nvL -t nat |grep $kip|grep 5359|grep tcp  || iptables -t nat -I PREROUTING -s  $kip  -p tcp --dport 53 -j REDIRECT --to-ports 5359
 
 
 fi
