@@ -1,0 +1,17 @@
+#for cron
+#*/60  * * * * sh /root/cip
+
+rm /tmp/tmp_getip1 &
+sleep 1
+/usr/bin/wget -T 5 -t 3   http://members.3322.org/dyndns/getip -O /tmp/tmp_getip1
+ls /tmp/tmp_getip1 || exit 0
+ipnow=`cat /tmp/tmp_getip1 | awk '{  print $1} ' `
+dd=`date "+%Y_%m_%d %H:%M:%S"`
+cat /root/log/iplog | awk 'END {print}' >/tmp/ip_before
+cat /tmp/ip_before|grep $ipnow && echo ip did not change
+cat /tmp/ip_before|grep $ipnow || echo ip changed write log
+cat /tmp/ip_before|grep $ipnow || echo $ipnow at $dd  >>/root/log/iplog
+
+echo ---------;cat /root/log/iplog
+
+exit 0;
