@@ -1,0 +1,15 @@
+ccc=cip
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
+chmod 755 =/root/$ccc
+
+ccc=getip6
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
+chmod 755 =/root/$ccc
+
+ccc=gettt
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
+chmod 755 =/root/$ccc
+
+
+
+
