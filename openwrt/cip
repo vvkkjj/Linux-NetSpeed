@@ -8,8 +8,9 @@
 #ipnow=`cat /tmp/tmp_getip1 | awk '{  print $1} ' `
 
 ipnow=`curl ipv4.ip.sb`
-
+sleep 2
 ipnow=`curl ipv4.ip.sb`
+
 echo $ipnow |grep . || echo noip
 echo $ipnow |grep . || exit 0
 
