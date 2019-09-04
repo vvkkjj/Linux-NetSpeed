@@ -9,13 +9,12 @@
 
 ipnow=`curl ipv4.ip.sb`
 
+ipnow=`curl ipv4.ip.sb`
+echo $ipnow |grep . || echo noip
+echo $ipnow |grep . || exit 0
+
 dd=`date "+%Y_%m_%d %H:%M:%S"`
-
 cat /root/log/iplog | awk 'END {print}' >/tmp/ip_before
-
-cat /tmp/ip_before|grep . || echo no ip exit
-cat /tmp/ip_before|grep . || exit 0
-
 cat /tmp/ip_before|grep $ipnow && echo ip did not change
 cat /tmp/ip_before|grep $ipnow || echo ip changed write log
 cat /tmp/ip_before|grep $ipnow || echo $ipnow at $dd  >>/root/log/iplog
