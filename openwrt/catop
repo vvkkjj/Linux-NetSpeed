@@ -7,7 +7,7 @@ do
 cat /etc/openvpntap/op_stat_$ii|grep ,02, && tries=$((tries+1)) && echo -----------------------------------
 done
 
-echo $tries
+echo total vpn client is $tries
 
 exit 0
 
