@@ -22,3 +22,7 @@ wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc
 chmod 755 /root/$ccc
 
 
+## wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/openvpn-x86 --no-check-certificate  --output-document=/usr/sbin/openvpn ; chmod 755 /usr/sbin/openvpn
+#
+
+
