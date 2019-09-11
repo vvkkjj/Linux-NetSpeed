@@ -1,0 +1,48 @@
+#!/bin/sh
+
+####iptables -F -t nat
+#
+mode=udp
+srcip=0.0.0.0/0
+vpfron=10.2.123
+bian=I
+
+echo $1 |grep deliptables && bian=D
+
+tries=100
+while [[ $tries -lt 200 ]]
+do
+
+localip=$vpfron.1
+localport=55$tries
+
+remoteip=$vpfron.$tries
+remoteport=55$tries
+
+iptables -t nat -$bian PREROUTING -s  $srcip    -p  $mode --dport $localport  -j DNAT --to-destination  $remoteip:$remoteport
+iptables -t nat -$bian  POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport  -j SNAT --to-source  $localip
+
+tries=$((tries+1))
+done
+
+
+tries=200
+while [[ $tries -lt 300 ]]
+do
+pries=$((tries-100))
+localip=$vpfron.1
+localport=55$tries
+remoteip=$vpfron.$pries
+remoteport=55$tries
+
+iptables -t nat -$bian  PREROUTING -s  $srcip    -p  $mode --dport $localport  -j DNAT --to-destination  $remoteip:$remoteport
+iptables -t nat -$bian  POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport  -j SNAT --to-source  $localip
+
+tries=$((tries+1))
+done
+
+echo sucess
+echo sucess
+echo sucess
+echo sucess
+exit 0
