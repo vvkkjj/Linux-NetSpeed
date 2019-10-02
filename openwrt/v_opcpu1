@@ -1,0 +1,41 @@
+wei=`uci get system.@system[0].hostname `
+ffl=`ps |grep openvp|grep tap|awk 'END {print}'|    awk '{print $8}'   | awk -F '[/]' '{print $3}' `
+
+cpunum=`cat /proc/cpuinfo| grep "processor"| wc -l `
+
+str=`uptime`;substr=${str##*average:} ;
+cpustat=`echo $substr  |awk -F '[,]' '{print $1}'  `
+echo $cpustat
+
+
+fss=/etc/$ffl
+fnn=status
+nn1=`cat /etc/hname`
+tries=0
+
+date > /root/oooooooo_status
+
+for ii in `ls $fss |grep $fnn |grep -v log`
+do
+
+echo ================================================
+echo =====$fss/$ii===================================
+      for kk in `cat $fss/$ii`
+      do
+          echo $kk |grep ,02, && tries=$((tries+1)) && echo -----------------------------------
+      done
+echo =====$fss/$ii===================================
+
+
+done
+dd=`date +"%Y-%m-%d_%H:%M:%S"`
+
+echo $wei/$tries/$dd/$cpunum/$cpustat > /root/oooooooo1_status
+###nn1=`cat /etc/hname`
+cp /root/oooooooo1_status /www/opcpu_$nn1
+echo ..............................................
+cat /root/oooooooo1_status
+
+exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;exit 0 ;
+
+
