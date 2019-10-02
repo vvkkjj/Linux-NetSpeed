@@ -1,0 +1,128 @@
+#!/bin/sh
+#cat  /tmp/ip.pule.sq | awk -F '[./|]' '{print $1,$2,$3,$4,$5,$6,$7,$8}' >  /tmp/ip.pule.sq.ip-id 
+#1024*1024=1048576  1048576/8=131072  131072/1.09=120250
+
+#chmod 755 /root/sp
+
+iface=eth1;ifconfig|grep eth0.2 && iface=eth0.2;ifconfig|grep pppoe-wan && iface=pppoe-wan;ifconfig|grep pppoe-pp && iface=pppoe-pp
+
+mins=$1
+secs1=$(($mins*60))
+secs2=$(($secs1+48))
+/root/v_bw $secs2 $iface &
+sleep 47
+
+
+dmins=$(($mins*2))
+echo $dmins
+
+rm /tmp/ctran__$iface*
+
+tries=0
+while [[ $tries -lt $dmins ]]
+do
+ luci-bwc -i $iface >/tmp/ctran__$iface.tmp0
+ tail -n 41 /tmp/ctran__$iface.tmp0  >/tmp/ctran__$iface.tmp1  ;  #cat /tmp/ctran__$iface.tmp1
+ cat /tmp/ctran__$iface.tmp1 | awk -F '["[,"]' '{print $1,$2,$3,$4,$5,$6,$7,$8}' >/tmp/ctran__$iface.tmp2
+
+ rt1=ccccdddd
+ st1=ccccdddd
+ rmax=0
+ smax=0
+ if ls /tmp/ctran__$iface.bigest.r_speed
+ then
+	rmax=`cat /tmp/ctran__$iface.bigest.r_speed | awk -F '["/"]' '{print $2}'`
+ fi
+ if ls /tmp/ctran__$iface.bigest.s_speed
+ then
+	smax=`cat /tmp/ctran__$iface.bigest.s_speed | awk -F '["/"]' '{print $2}'`
+ fi
+  
+ cat /tmp/ctran__$iface.tmp2 | while read tt re kk se gg
+ do
+
+ #echo $tt.$se ---------$rt1
+  if echo $rt1 |grep ccccdddd 
+  then
+    rt1=$re
+	st1=$se
+  else
+    #echo ===============$rmax
+	rcha=$(($re-$rt1))
+	scha=$(($se-$st1))
+	#echo $rcha
+		if [ $rcha -gt $rmax ]
+		then
+			rmax=$rcha
+			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
+			re2=`awk 'BEGIN{printf "%.2f\n",('$rcha'/'131072')}'`
+			echo download,$re2,M,at,$dd/$rcha/$tt >/tmp/ctran__$iface.bigest.r_speed
+		fi
+		if [ $scha -gt $smax ]
+		then
+			smax=$scha
+			se2=`awk 'BEGIN{printf "%.2f\n",('$scha'/'131072')}'`
+			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
+			echo upload,$se2,M,at,$dd/$scha/$tt >/tmp/ctran__$iface.bigest.s_speed
+		fi
+   
+    rt1=$re
+	st1=$se
+  fi
+ done
+
+sleep 30
+tries=$((tries+1))
+
+done
+
+iface=eth1;ifconfig|grep pppoe-wan && iface=pppoe-wan;ifconfig|grep pppoe-pp && iface=pppoe-pp ;echo $iface
+hh2=`cat /tmp/ctran__$iface.bigest.r_speed| awk -F '["/"]' '{print $1}' `
+jj2=`cat /tmp/ctran__$iface.bigest.s_speed| awk -F '["/"]' '{print $1}'  `
+dd2=`date "+%Y-%m-%d_%H:%M:%S" `
+nn2=`cat /etc/hname`
+echo $dd2/$nn2/$hh2/$jj2 > /www/spspeed2_$nn2
+
+nn2=`cat /etc/hname`; tail -n 9 /www/spspeed2_$nn2 
+##  date > /www/spspeed2_*
+
+
+exit 0
+
+
+wangka=eth1
+#1024*1024=1048576  1048576/8=131072  131072/1.09=120250
+tries=0
+st1=ccccdddd
+while [[ $tries -lt 60 ]]
+do
+da=`date`
+echo $st1 |grep ccccdddd && st1=`ifconfig $wangka |grep bytes | awk -F '[:(]' '{print $2}'`
+echo $rt1 |grep ccccdddd && rt1=`ifconfig $wangka |grep bytes | awk -F '[:(]' '{print $4}'`
+
+st2=`ifconfig $wangka |grep bytes | awk -F '[:(]' '{print $2}'`
+rt2=`ifconfig $wangka |grep bytes | awk -F '[:(]' '{print $4}'`
+
+re=`awk 'BEGIN{printf "%.2f\n",('$(($st2-$st1))'/'120250')}'`
+se=`awk 'BEGIN{printf "%.2f\n",('$(($rt2-$rt1))'/'120250')}'`
+echo re:$re.MB____send:$se.MB_at_$da
+st1=`ifconfig $wangka |grep bytes | awk -F '[:(]' '{print $2}'`
+rt1=`ifconfig $wangka |grep bytes | awk -F '[:(]' '{print $4}'`
+tries=$((tries+1))
+sleep 1
+done
+exit 0
+
+###sl=1;st1=100;st2=50;echo $((     $(($st2-$st1))    /     $((1024*$sl))     ))
+
+a=1; b=2 ; awk 'BEGIN{printf "%.2f\n",('$(($a-$b))'/'$b')}'
+
+# 25 9 * * * /root/sp 10
+
+iface=eth1;ifconfig|grep pppoe-wan && iface=pppoe-wan;ifconfig|grep pppoe-pp && iface=pppoe-pp ;echo $iface
+cat /tmp/ctran__$iface.bigest.r_speed;cat /tmp/ctran__$iface.bigest.s_speed
+
+nn2=`cat /etc/hname`; tail -n 9 /www/spspeed_$nn2 
+##  rm  /www/spspeed_*
+
+
