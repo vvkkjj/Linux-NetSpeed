@@ -81,6 +81,7 @@ hh2=`cat /tmp/ctran__$iface.bigest.r_speed| awk -F '["/"]' '{print $1}' `
 jj2=`cat /tmp/ctran__$iface.bigest.s_speed| awk -F '["/"]' '{print $1}'  `
 dd2=`date "+%Y-%m-%d_%H:%M:%S" `
 nn2=`cat /etc/hname`
+rm /www/spspeed2_$nn2
 echo $dd2/$nn2/$hh2/$jj2 > /www/spspeed2_$nn2
 
 nn2=`cat /etc/hname`; tail -n 9 /www/spspeed2_$nn2 
