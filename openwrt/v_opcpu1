@@ -15,7 +15,7 @@ tries=0
 
 date > /root/oooooooo_status
 
-for ii in `ls $fss |grep $fnn |grep -v log`
+for ii in `ls $fss |grep $fnn`
 do
 
 echo ================================================
