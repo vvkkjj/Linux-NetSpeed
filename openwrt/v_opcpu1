@@ -32,6 +32,8 @@ dd=`date +"%Y-%m-%d_%H:%M:%S"`
 
 echo $wei/$tries/$dd/$cpunum/$cpustat > /root/oooooooo1_status
 ###nn1=`cat /etc/hname`
+
+rm /www/opcpu_$nn1
 cp /root/oooooooo1_status /www/opcpu_$nn1
 echo ..............................................
 cat /root/oooooooo1_status
