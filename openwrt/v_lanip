@@ -29,6 +29,8 @@ done
 echo $sus ===========
 
 nn1=`cat /etc/hname`
+
+rm /www/lanip_$nn1
 echo $sus >/www/lanip_$nn1
 
 exit 0
