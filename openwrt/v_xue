@@ -1,0 +1,70 @@
+##   cat /root/opclinet2 | awk '{printf "%-6s%-15s%-13s%-13s%-13s%-9s%-13s%-9s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9}' 
+
+# spspeed_$nn2 
+echo "---- ---- ---- ---- ----- --- ------- ------ ----- ---- ---- ---- ----- --- ---">> /root/opclinet2
+echo "Num Detail Date Vp.N Vp.N.time down_Max down.time up_Max up.time wg_down wgd_t wg_up wgu_t cpu"    >> /root/opclinet2
+echo --------------------------------------------------------------- >> /root/opclinet
+sleep 11
+ddate=`date "+%Y-%m-%d"`
+
+for nn in 138 139 141 121 131 101 113 128
+do
+wget -T 5 -t 3 http://10.2.22.$nn:180/opcpu_$nn -qO /tmp/opnum_$nn
+wget -T 5 -t 3 http://10.2.22.$nn:180/spspeed2_$nn -qO /tmp/spspeed_$nn
+wget -T 5 -t 3 http://10.2.22.$nn:180/wgspeed_$nn -qO /tmp/wgspeed_$nn
+
+cat /tmp/opnum_$nn >> /root/opclinet
+tail -n 1 /tmp/spspeed_$nn >> /root/opclinet
+echo ==== >> /root/opclinet
+
+
+dc=`cat /tmp/opnum_$nn | awk -F '["/"]' '{print $4}'`
+dz=`cat /tmp/opnum_$nn | awk -F '["/"]' '{print $5}'`
+ddc=$dc-$dz
+det=`cat /tmp/opnum_$nn | awk -F '["/"]' '{print $1}'`
+cli=`cat /tmp/opnum_$nn | awk -F '["/"]' '{print $2}'`
+tt1=`cat /tmp/opnum_$nn | awk -F '["/"]' '{print $3}' | awk -F '["_"]' '{print $2}' `
+
+dd1=`tail -n 1 /tmp/spspeed_$nn| awk -F '["_"]' '{print $1}'     `
+down=`tail -n 1 /tmp/spspeed_$nn| awk -F '[","]' '{print $2}'     `
+dt1=`tail -n 1 /tmp/spspeed_$nn| awk -F '["/_"]' '{print $5}'     `
+up=`tail -n 1 /tmp/spspeed_$nn| awk -F '[","]' '{print $6}'     `
+ut1=`tail -n 1 /tmp/spspeed_$nn| awk -F '["/_"]' '{print $7}'     `
+
+wdd1=`tail -n 1 /tmp/wgspeed_$nn| awk -F '["_"]' '{print $1}'     `
+wdown=`tail -n 1 /tmp/wgspeed_$nn| awk -F '[","]' '{print $2}'     `
+wdt1=`tail -n 1 /tmp/wgspeed_$nn| awk -F '["/_"]' '{print $5}'     `
+wup=`tail -n 1 /tmp/wgspeed_$nn| awk -F '[","]' '{print $6}'     `
+wut1=`tail -n 1 /tmp/wgspeed_$nn| awk -F '["/_"]' '{print $7}'     `
+
+
+[ -z $ddc ] && ddc="---"
+
+[ -z $det ] && det="---"
+[ -z $cli ] && cli="---"
+[ -z $tt1 ] && tt1="---"
+
+[ -z $dd1 ] && dd1="---"
+[ -z $down ] && down="---"
+[ -z $dt1 ] && dt1="---"
+[ -z $up ] && up="---"
+[ -z $ut1 ] && ut1="---"
+
+[ -z $wdd1 ] && dd1="---"
+[ -z $wdown ] && down="---"
+[ -z $wdt1 ] && dt1="---"
+[ -z $wup ] && up="---"
+[ -z $wut1 ] && ut1="---"
+
+
+echo $nn $det $ddate $cli $tt1 $down $dt1 $up $ut1 $wdown $wdt1 $wup $wut1 $ddc    >> /root/opclinet2
+done
+
+tail -n 50  /root/opclinet2 | awk '{printf "%-6s%-17s%-13s%-7s%-13s%-9s%-11s%-9s%-11s%-9s%-11s%-9s%-11s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14}' 
+
+# tail -n 16  /root/opclinet
+
+exit 0
+
+##   tail -n 20  /root/opclinet2 | awk '{printf "%-6s%-15s%-13s%-13s%-13s%-9s%-13s%-9s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9}' 
+
