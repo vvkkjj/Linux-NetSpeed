@@ -77,7 +77,7 @@ tries=$((tries+1))
 
 done
 
-iface=eth1;ifconfig|grep pppoe-wan && iface=pppoe-wan;ifconfig|grep pppoe-pp && iface=pppoe-pp ;echo $iface
+##iface=eth1;ifconfig|grep pppoe-wan && iface=pppoe-wan;ifconfig|grep pppoe-pp && iface=pppoe-pp ;echo $iface
 hh2=`cat /tmp/ctran__$iface.bigest.r_speed| awk -F '["/"]' '{print $1}' `
 jj2=`cat /tmp/ctran__$iface.bigest.s_speed| awk -F '["/"]' '{print $1}'  `
 dd2=`date "+%Y-%m-%d_%H:%M:%S" `
