@@ -12,9 +12,9 @@ for ip in `seq 255`; do
 done
 sleep 3
 rm /tmp/online_shebei
-cat /proc/net/arp | grep -e '0x2'|grep $k1.$k2.$k3. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"
+cat /proc/net/arp | grep  '0x2' |grep br-lan |grep -v  169.254.  |grep -v "$k1.$k2.$k3.1 "|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"
 echo ------------
-cat /proc/net/arp | grep -e '0x2' |grep $k1.$k2.$k3. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"  >/tmp/online_shebei
+cat /proc/net/arp | grep  '0x2' |grep br-lan |grep -v  169.254.  |grep -v "$k1.$k2.$k3.1 "|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"  >/tmp/online_shebei
 
 grep -c ""   /tmp/online_shebei
 echo ------------
