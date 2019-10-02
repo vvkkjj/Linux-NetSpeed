@@ -28,6 +28,8 @@ ping -c 1 -W 1 $ii > /dev/null  && echo $ii && sus=$(($sus+1))
 done
 echo $sus ===========
 
+nn1=`cat /etc/hname`
+echo $sus >/www/lanip_$nn1
 
 exit 0
 
