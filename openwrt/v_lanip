@@ -12,11 +12,20 @@ for ip in `seq 255`; do
 done
 sleep 3
 rm /tmp/online_shebei
-cat /proc/net/arp | grep -e '0x2'|grep -v 169.254. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"
+cat /proc/net/arp | grep -e '0x2'|grep $k1.$k2.$k3. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"
 echo ------------
-cat /proc/net/arp | grep -e '0x2' |grep -v 169.254. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"  >/tmp/online_shebei
+cat /proc/net/arp | grep -e '0x2' |grep $k1.$k2.$k3. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"  >/tmp/online_shebei
 
 grep -c ""   /tmp/online_shebei
+echo ------------
+sus=0
+for ii in `cat /tmp/online_shebei|   awk -F '[" "]' '{print $1}'   `
+do
+ping -c 1 -W 1 $ii > /dev/null  && echo $ii && sus=$(($sus+1))
+
+done
+echo $sus ===========
+
 
 exit 0
 
