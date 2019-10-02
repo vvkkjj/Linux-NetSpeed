@@ -2,7 +2,7 @@ k1=`ip route |grep 'dev br-lan proto ' | awk -F '["."]' '{print $1}'           `
 k2=`ip route |grep 'dev br-lan proto ' | awk -F '["."]' '{print $2}'           `
 k3=`ip route |grep 'dev br-lan proto ' | awk -F '["."]' '{print $3}'           `
 
-dev br-lan proto static scope link
+#dev br-lan proto static scope link
 
 for ip in `seq 255`; do
     [ $ip == 1 ] && break
