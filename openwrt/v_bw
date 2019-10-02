@@ -1,0 +1,16 @@
+
+
+dmins=$1
+iface=$2
+tries=0
+
+while [[ $tries -lt $dmins ]]
+do
+luci-bwc -i $iface >/dev/null
+sleep 1
+tries=$((tries+1))
+echo $tries
+done
+
+exit 0
+
