@@ -1,0 +1,22 @@
+k1=`ip route |grep 'dev br-lan proto kernel scope link' | awk -F '["."]' '{print $1}'           `
+k2=`ip route |grep 'dev br-lan proto kernel scope link' | awk -F '["."]' '{print $2}'           `
+k3=`ip route |grep 'dev br-lan proto kernel scope link' | awk -F '["."]' '{print $3}'           `
+
+for ip in `seq 255`; do
+    [ $ip == 1 ] && break
+    n=$(($n + 1))
+    ping -c 1 -W 1 $k1.$k2.$k3.${ip} > /dev/null 2> /dev/null &
+    if [ $(( $n % 10 )) == 0 ]; then
+        sleep 1
+    fi
+done
+sleep 3
+rm /tmp/online_shebei
+cat /proc/net/arp | grep -e '0x2'|grep -v 169.254. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"
+echo ------------
+cat /proc/net/arp | grep -e '0x2' |grep -v 169.254. |grep -v "$k1.$k2.$k3.1     0"|grep -v "$k1.$k2.$k3.254"|grep -v "$k1.$k2.$k3.253"  >/tmp/online_shebei
+
+grep -c ""   /tmp/online_shebei
+
+exit 0
+
