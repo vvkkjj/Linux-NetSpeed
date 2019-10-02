@@ -1,8 +1,8 @@
 ##   cat /root/opclinet2 | awk '{printf "%-6s%-15s%-13s%-13s%-13s%-9s%-13s%-9s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9}' 
 
 # spspeed_$nn2 
-echo "---- ---- ---- ---- ----- --- ------- ------ ----- ---- ---- ---- ----- --- ---">> /root/opclinet2
-echo "Num Detail Date Vp.N Vp.N.time down_Max down.time up_Max up.time wg_down wgd_t wg_up wgu_t cpu"    >> /root/opclinet2
+echo "---- ---- ---- ---- ----- --- ------- ------ ----- ---- ---- ---- ----- --- --- --">> /root/opclinet2
+echo "Num Detail Date Vp.N Vp.N.time down_Max down.time up_Max up.time wg_down wgd_t wg_up wgu_t cpu lanip"    >> /root/opclinet2
 echo --------------------------------------------------------------- >> /root/opclinet
 sleep 11
 ddate=`date "+%Y-%m-%d"`
@@ -12,11 +12,13 @@ do
 wget -T 5 -t 3 http://10.2.22.$nn:180/opcpu_$nn -qO /tmp/opnum_$nn
 wget -T 5 -t 3 http://10.2.22.$nn:180/spspeed2_$nn -qO /tmp/spspeed_$nn
 wget -T 5 -t 3 http://10.2.22.$nn:180/wgspeed_$nn -qO /tmp/wgspeed_$nn
+wget -T 5 -t 3 http://10.2.22.$nn:180/lanip_$nn -qO /tmp/lanip_$nn
 
 cat /tmp/opnum_$nn >> /root/opclinet
 tail -n 1 /tmp/spspeed_$nn >> /root/opclinet
 echo ==== >> /root/opclinet
 
+lip=`cat /tmp/lanip_$nn `
 
 dc=`cat /tmp/opnum_$nn | awk -F '["/"]' '{print $4}'`
 dz=`cat /tmp/opnum_$nn | awk -F '["/"]' '{print $5}'`
@@ -56,15 +58,17 @@ wut1=`tail -n 1 /tmp/wgspeed_$nn| awk -F '["/_"]' '{print $7}'     `
 [ -z $wup ] && wup="---"
 [ -z $wut1 ] && wut1="---"
 
+[ -z $lip ] && lip="---"
 
-echo $nn $det $ddate $cli $tt1 $down $dt1 $up $ut1 $wdown $wdt1 $wup $wut1 $ddc    >> /root/opclinet2
+
+echo $nn $det $ddate $cli $tt1 $down $dt1 $up $ut1 $wdown $wdt1 $wup $wut1 $ddc $lip    >> /root/opclinet2
 done
 
-tail -n 50  /root/opclinet2 | awk '{printf "%-6s%-17s%-13s%-7s%-13s%-9s%-11s%-9s%-11s%-9s%-11s%-9s%-11s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14}' 
+tail -n 50  /root/opclinet2 | awk '{printf "%-6s%-17s%-13s%-7s%-13s%-9s%-11s%-9s%-11s%-9s%-11s%-9s%-11s%-9%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' 
 
 # tail -n 16  /root/opclinet
 
 exit 0
 
-##   tail -n 20  /root/opclinet2 | awk '{printf "%-6s%-15s%-13s%-13s%-13s%-9s%-13s%-9s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9}' 
+tail -n 20  /root/opclinet2 | awk '{printf "%-6s%-17s%-13s%-7s%-13s%-9s%-11s%-9s%-11s%-9s%-11s%-9s%-11s%-9%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' 
 
