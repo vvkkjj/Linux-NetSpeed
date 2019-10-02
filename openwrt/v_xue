@@ -1,4 +1,23 @@
 ##   cat /root/opclinet2 | awk '{printf "%-6s%-15s%-13s%-13s%-13s%-9s%-13s%-9s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9}' 
+##########################################
+if echo `date +%w` |grep 0 
+then
+echo 111
+exit 0
+fi
+
+if echo  `date +%w` |grep 6
+then
+echo 6666
+ echo 1111111 >> /tmp/wwwww11
+ exit 0
+fi
+################################
+
+
+
+
+
 chmod 755 /root/copa
 # spspeed_$nn2 
 echo "---- ---- ---- ---- ----- --- ------- ------ ----- ---- ---- ---- ----- --- --- --">> /root/opclinet2
