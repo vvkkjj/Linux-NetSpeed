@@ -1,5 +1,5 @@
 ##   cat /root/opclinet2 | awk '{printf "%-6s%-15s%-13s%-13s%-13s%-9s%-13s%-9s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9}' 
-
+chmod 755 /root/copa
 # spspeed_$nn2 
 echo "---- ---- ---- ---- ----- --- ------- ------ ----- ---- ---- ---- ----- --- --- --">> /root/opclinet2
 echo "Num Detail Date Vp.N Vp.N.time down_Max down.time up_Max up.time wg_down wgd_t wg_up wgu_t cpu lanip"    >> /root/opclinet2
@@ -64,7 +64,7 @@ wut1=`tail -n 1 /tmp/wgspeed_$nn| awk -F '["/_"]' '{print $7}'     `
 echo $nn $det $ddate $cli $tt1 $down $dt1 $up $ut1 $wdown $wdt1 $wup $wut1 $ddc $lip    >> /root/opclinet2
 done
 
-tail -n 50  /root/opclinet2 | awk '{printf "%-6s%-17s%-13s%-7s%-13s%-9s%-11s%-9s%-11s%-9s%-11s%-9s%-11s%-9%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' 
+tail -n 50  /root/opclinet2 | awk '{printf "%-6s%-17s%-13s%-7s%-13s%-9s%-11s%-9s%-11s%-9s%-11s%-9s%-11s%-9s%-9s\n",$1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15}' 
 
 # tail -n 16  /root/opclinet
 
