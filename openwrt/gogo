@@ -21,6 +21,25 @@ ccc=catop
 wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
 chmod 755 /root/$ccc
 
+ccc=v_bw
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
+chmod 755 /root/$ccc
+
+
+ccc=v_opcpu1
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
+chmod 755 /root/$ccc
+
+ccc=v_sp_wan
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
+chmod 755 /root/$ccc
+
+ccc=v_sp_wg
+wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/$ccc  --no-check-certificate  --output-document=/root/$ccc
+chmod 755 /root/$ccc
+
+
+
 
 ## wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/openvpn-x86 --no-check-certificate  --output-document=/usr/sbin/openvpn ; chmod 755 /usr/sbin/openvpn
 #
