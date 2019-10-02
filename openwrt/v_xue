@@ -50,11 +50,11 @@ wut1=`tail -n 1 /tmp/wgspeed_$nn| awk -F '["/_"]' '{print $7}'     `
 [ -z $up ] && up="---"
 [ -z $ut1 ] && ut1="---"
 
-[ -z $wdd1 ] && dd1="---"
-[ -z $wdown ] && down="---"
-[ -z $wdt1 ] && dt1="---"
-[ -z $wup ] && up="---"
-[ -z $wut1 ] && ut1="---"
+[ -z $wdd1 ] && wdd1="---"
+[ -z $wdown ] && wdown="---"
+[ -z $wdt1 ] && wdt1="---"
+[ -z $wup ] && wup="---"
+[ -z $wut1 ] && wut1="---"
 
 
 echo $nn $det $ddate $cli $tt1 $down $dt1 $up $ut1 $wdown $wdt1 $wup $wut1 $ddc    >> /root/opclinet2
