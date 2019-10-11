@@ -110,6 +110,13 @@ ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe007
 ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe008
 ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe009
 
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe111
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe222
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe333
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe555
+ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe666
+
+
 
 wget -N -O  /usr/minivtun   https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/min-ub.x64
 chmod 755  /usr/minivtun
