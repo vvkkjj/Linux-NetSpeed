@@ -42,7 +42,7 @@ killall ntpd ;sleep 2;ntpdate -u asia.pool.ntp.org
 ##   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 EOF
-
+chmod 755 /root/time
 
 cat > /root/ruisu <<EOF
 /appex/bin/serverSpeeder.sh status
