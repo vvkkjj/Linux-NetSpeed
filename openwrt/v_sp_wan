@@ -8,9 +8,9 @@ iface=eth1;ifconfig|grep eth0.2 && iface=eth0.2;ifconfig|grep pppoe-wan && iface
 
 mins=$1
 secs1=$(($mins*60))
-secs2=$(($secs1+48))
+secs2=$(($secs1+66))
 /root/v_bw $secs2 $iface &
-sleep 47
+sleep 59
 
 
 dmins=$(($mins*2))
