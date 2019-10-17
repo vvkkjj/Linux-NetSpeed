@@ -11,7 +11,7 @@ mins=$1
 secs1=$(($mins*60))
 secs2=$(($secs1+66))
 /root/v_bw $secs2 $iface &
-sleep 59
+sleep 57
 
 
 dmins=$(($mins*2))
