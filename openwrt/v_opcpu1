@@ -15,6 +15,9 @@ tries=0
 
 date > /root/oooooooo_status
 
+keyi=",02,"
+cat /etc/hname|grep 101 && keyi=",my-client21,"
+
 for ii in `ls $fss |grep $fnn`
 do
 
@@ -22,7 +25,7 @@ echo ================================================
 echo =====$fss/$ii===================================
       for kk in `cat $fss/$ii`
       do
-          echo $kk |grep ,02, && tries=$((tries+1)) && echo -----------------------------------
+          echo $kk |grep $keyi && tries=$((tries+1)) && echo -----------------------------------
       done
 echo =====$fss/$ii===================================
 
