@@ -42,6 +42,10 @@ do
  do
 
  #echo $tt.$se ---------$rt1
+    dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
+    ls /tmp/ctran__$iface.bigest.r_speed || echo download,0,M,at,$dd/0/$tt >/tmp/ctran__$iface.bigest.r_speed
+    ls /tmp/ctran__$iface.bigest.s_speed || echo download,0,M,at,$dd/0/$tt >/tmp/ctran__$iface.bigest.s_speed
+  
   if echo $rt1 |grep ccccdddd 
   then
     rt1=$re
