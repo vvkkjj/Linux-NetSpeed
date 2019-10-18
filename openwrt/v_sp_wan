@@ -17,7 +17,7 @@ dmins=$(($mins*2))
 echo $dmins
 
 rm /tmp/ctran__$iface*
-
+tak=0
 tries=0
 while [[ $tries -lt $dmins ]]
 do
@@ -40,16 +40,13 @@ do
   
  cat /tmp/ctran__$iface.tmp2 | while read tt re kk se gg
  do
-
+	tak=$((tak+1))
  #echo $tt.$se ---------$rt1
-    dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
-    ls /tmp/ctran__$iface.bigest.r_speed || echo download,0,M,at,$dd/0/$tt >/tmp/ctran__$iface.bigest.r_speed
-    ls /tmp/ctran__$iface.bigest.s_speed || echo download,0,M,at,$dd/0/$tt >/tmp/ctran__$iface.bigest.s_speed
-  
+
   if echo $rt1 |grep ccccdddd 
   then
     rt1=$re
-	st1=$se
+    st1=$se
   else
     #echo ===============$rmax
 	rcha=$(($re-$rt1))
@@ -60,22 +57,29 @@ do
 			
 			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
 			re2=`awk 'BEGIN{printf "%.2f\n",('$rcha'/'131072')}'`
-			if  [ $rcha -lt 27000000 ]
+			rmax=$rcha
+			if  [ $tak -lt 15 ]
 			then
-				rmax=$rcha
-				echo download,$re2,M,at,$dd/$rcha/$tt >/tmp/ctran__$iface.bigest.r_speed
+				rmax=0
+				re2=0
+				echo $tak ------ $rmax
 			fi
+			echo download,$re2,M,at,$dd/$rmax/$tt >/tmp/ctran__$iface.bigest.r_speed
 		fi
 		if [ $scha -gt $smax ]
 		then
 			
 			se2=`awk 'BEGIN{printf "%.2f\n",('$scha'/'131072')}'`
 			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
-			if  [ $scha -lt 27000000 ]	
+			smax=$scha
+			if  [ $tak -lt 15 ]
 			then
-				smax=$scha
-				echo upload,$se2,M,at,$dd/$scha/$tt >/tmp/ctran__$iface.bigest.s_speed
+				smax=0
+				se2=0
+				echo $tak ===== $smax
 			fi
+				echo upload,$se2,M,at,$dd/$smax/$tt >/tmp/ctran__$iface.bigest.s_speed
+
 		fi
    
     rt1=$re
