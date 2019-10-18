@@ -60,7 +60,7 @@ do
 		then
 			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
 			re2=`awk 'BEGIN{printf "%.2f\n",('$rcha'/'131072')}'`
-			if  [ $re2 -lt 200 ]
+			if  [ $rcha -lt 27000000 ]
 			then
 				rmax=$rcha
 				echo download,$re2,M,at,$dd/$rcha/$tt >/tmp/ctran__$iface.bigest.r_speed
@@ -71,7 +71,7 @@ do
 
 			se2=`awk 'BEGIN{printf "%.2f\n",('$scha'/'131072')}'`
 			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
-			if  [ $se2 -lt 200 ]
+			if  [ $scha -lt 27000000 ]
 			then
 				smax=$scha
 				echo upload,$se2,M,at,$dd/$scha/$tt >/tmp/ctran__$iface.bigest.s_speed
