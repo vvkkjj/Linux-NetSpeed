@@ -59,7 +59,7 @@ do
 			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
 			re2=`awk 'BEGIN{printf "%.2f\n",('$rcha'/'131072')}'`
 			rmax=$rcha
-			if  [ $tak -lt 45 ]
+			if  [ $tries -lt 1 ]
 			then
 				rmax=0
 				re2=0
@@ -73,7 +73,7 @@ do
 			se2=`awk 'BEGIN{printf "%.2f\n",('$scha'/'131072')}'`
 			dd=`date -d @$tt  "+%Y-%m-%d_%H:%M:%S"`
 			smax=$scha
-			if  [ $tak -lt 45 ]
+			if  [ $tries -lt 1 ]
 			then
 				smax=0
 				se2=0
