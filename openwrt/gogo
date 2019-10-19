@@ -48,4 +48,13 @@ chmod 755 /root/$ccc
 ## wget https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/openwrt/openvpn-x86 --no-check-certificate  --output-document=/usr/sbin/openvpn ; chmod 755 /usr/sbin/openvpn
 #
 
+ls /usr/bin/tinym* && exit 0
+ls /usr/tinym* && exit 0
+
+
+cat /etc/openwrt_release |grep x86/generic && wget https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/tinymapper_x86 --no-check-certificate  --output-document=/usr/bin/tinymapper && chmod 755 /usr/bin/tinymapper
+
+cat /etc/openwrt_release |grep ramips/mt7621 && wget https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/tinymapper_7621 --no-check-certificate  --output-document=/usr/bin/tinymapper && chmod 755 /usr/bin/tinymapper
+
+
 
