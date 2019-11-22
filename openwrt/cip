@@ -7,9 +7,9 @@
 #ls /tmp/tmp_getip1 || exit 0
 #ipnow=`cat /tmp/tmp_getip1 | awk '{  print $1} ' `
 
-ipnow=`curl ipv4.ip.sb`
+ipnow=`curl ipv4.ip.sb --silent --connect-timeout 10`
 sleep 2
-ipnow=`curl ipv4.ip.sb`
+ipnow=`curl ipv4.ip.sb --silent --connect-timeout 10`
 
 echo $ipnow |grep . || echo noip
 echo $ipnow |grep . || exit 0
