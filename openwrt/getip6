@@ -1,2 +1,6 @@
-#curl ipv4.ip.sb
+curl ipv4.ip.sb
+
+echo ----------------------
+
 curl ipv6.ip.sb
+echo ----------------------
