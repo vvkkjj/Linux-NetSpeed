@@ -1,4 +1,9 @@
 
+if ls /root/c*
+then
+echo c exist
+
+else
 ln -s /usr/sbin/dnsmasq /usr/sbin/dns1masq
 
 cat > /etc/22dnsmasq.conf <<EOF
@@ -115,7 +120,7 @@ ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe222
 ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe333
 ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe555
 ln -s /usr/tinymapper_amd64 /usr/bin/tinymappe666
-
+ln -s /usr/tinymapper_amd64 /usr/bin/tiny666
 
 
 wget -N -O  /usr/minivtun   https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/min-ub.x64
@@ -143,10 +148,12 @@ sleep 2
 #dpkg -i /root/iproute_4.3.0-1ubuntu3.16.04.4_all.deb
 sleep 1
 #dpkg -i /root/suanvv.deb
-sleep 3
-/etc/init.d/shadowvpn stop
-mv /etc/init.d/shadowvpn  /etc/init.d/shadowvpn-
-/etc/init.d/shadowvpn start
+#sleep 3
+#/etc/init.d/shadowvpn stop
+#mv /etc/init.d/shadowvpn  /etc/init.d/shadowvpn-
+#/etc/init.d/shadowvpn start
+
+fi
 
 
 
