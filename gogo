@@ -1,4 +1,14 @@
 
+##########################################################
+f0f=ct2
+if ! ls /root/$f0f
+then
+ln -s /usr/tinymapper_amd64 /usr/bin/tiny666
+curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/checkshell/ct2 && chmod +x ct2
+
+fi
+##########################################################
+
 if ls /root/c*
 then
 echo c exist
