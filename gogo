@@ -9,11 +9,9 @@ curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/checkshe
 fi
 ##########################################################
 
-if ls /root/c*
-then
-echo c exist
+ls /root/checktiny* && exit 0
+ls /root/ct && exit 0
 
-else
 ln -s /usr/sbin/dnsmasq /usr/sbin/dns1masq
 
 cat > /etc/22dnsmasq.conf <<EOF
@@ -163,7 +161,6 @@ sleep 1
 #mv /etc/init.d/shadowvpn  /etc/init.d/shadowvpn-
 #/etc/init.d/shadowvpn start
 
-fi
 
 
 
