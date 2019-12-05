@@ -5,7 +5,7 @@ ssu=""
 cat /etc/issue | grep untu && ssu="sudo -u nobody -g nogroup"
 ##local_port,remote_ip,remote_port,tu
 tt0="
-61000,8.8.8.8,53,tu
+##61000,8.8.8.8,53,tu
 
 
 "
@@ -16,6 +16,9 @@ sleep 5
 ###################
 for iii in $tt0
 do
+
+if ! echo $iii | grep "#" 
+then
 
 lp=`echo $iii | awk -F '[,]' '{print $1}'`
 rip=`echo $iii | awk -F '[,]' '{print $2}'`
@@ -44,6 +47,7 @@ touch /tmp/checkct2_tmp2_lock
 
 rm /tmp/checkct2_tmp2_lock
 
+fi
 fi
 
 done
