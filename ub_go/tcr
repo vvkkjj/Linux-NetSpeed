@@ -1,0 +1,7 @@
+dtime=139
+/sbin/tc qdisc delete dev tun93  root netem &
+sleep 1
+echo 3333
+sleep 3
+/sbin/tc qdisc add     dev tun93  root netem delay $dtime\ms
+
