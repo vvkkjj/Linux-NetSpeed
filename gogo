@@ -9,6 +9,12 @@ curl  -O https://raw.githubusercontent.com/vvkkjj/Linux-NetSpeed/master/checkshe
 fi
 ##########################################################
 
+cat > /root/name <<EOF
+hostname \$1
+echo \$1 > /etc/hostname
+EOF
+
+
 ls /root/checktiny* && exit 0
 ls /root/ct && exit 0
 
@@ -31,10 +37,6 @@ netstat -lnp
 EOF
 
 
-cat > /root/name <<EOF
-hostname \$1
-echo \$1 > /etc/hostname
-EOF
 
 cat > /root/nett <<EOF
 netstat -lnp
