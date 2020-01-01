@@ -14,6 +14,14 @@ hostname \$1
 echo \$1 > /etc/hostname
 EOF
 
+cat > /root/cron <<EOF
+echo /var/spool/cron/crontabs/root
+##centos##  /var/spool/cron/root
+
+EOF
+
+
+
 
 ls /root/checktiny* && exit 0
 ls /root/ct && exit 0
