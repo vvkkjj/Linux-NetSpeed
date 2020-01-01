@@ -47,7 +47,8 @@ EOF
 
 
 cat > /root/time <<EOF
-
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ls /usr/sbin/ntpdate || apt-get install ntpdate
 killall ntpd ;sleep 2;ntpdate -u asia.pool.ntp.org 
 
 ##   ln -sf  /usr/share/zoneinfo/America/New_York  /etc/localtime
