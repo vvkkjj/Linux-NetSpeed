@@ -1,23 +1,32 @@
 #!/bin/sh
 #
+######startport must smaller than endport
+localport_start=20200
+localport___end=20299
+######vpn lan remote ip
+remoteip=10.0.202.1
+
 #default=allip=0.0.0.0/0
 srcip=0.0.0.0/0
 
-##########################################################
-##change for your setting
-##########################################################
 ######tcp or udp
 mode=udp
 
 ######vpn lan local ip
-localip=10.0.202.2
+varible=`/sbin/ip route|grep default | head -1` 
+eth=`echo ${varible#*dev }|awk '{print $1}'      `
 
-######startport must smaller than endport
-localport_start=30000
-localport___end=30003
+#if /sbin/ip route | grep $remoteip | head -1
+#then
+#varible=`/sbin/ip route|grep $remoteip` ; eth=`echo ${varible#*dev }|awk '{print $1}'      `
+#fi
 
-######vpn lan remote ip
-remoteip=10.0.202.1
+localip=`/sbin/ifconfig $eth | grep "inet addr:" |awk '{print $2}'| awk -F '[:]'  '{print $2}'    `
+
+#localip=10.0.202.2
+
+
+
 ##########################################################
 
 localport_rate=$localport_start:$localport___end
