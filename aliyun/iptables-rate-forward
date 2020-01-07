@@ -21,6 +21,7 @@ eth=`echo ${varible#*dev }|awk '{print $1}'      `
 #varible=`/sbin/ip route|grep $remoteip` ; eth=`echo ${varible#*dev }|awk '{print $1}'      `
 #fi
 
+#eth=eth0
 localip=`/sbin/ifconfig $eth | grep "inet addr:" |awk '{print $2}'| awk -F '[:]'  '{print $2}'    `
 
 #localip=10.0.202.2
