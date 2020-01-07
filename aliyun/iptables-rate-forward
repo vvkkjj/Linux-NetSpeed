@@ -1,8 +1,8 @@
 #!/bin/sh
 #
 ######startport must smaller than endport
-localport_start=20200
-localport___end=20299
+localport_start=20300
+localport___end=20399
 ######vpn lan remote ip
 remoteip=10.0.202.1
 
