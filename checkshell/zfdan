@@ -1,32 +1,36 @@
 #!/bin/bash
 #cname same can not be same!
-cname=f0K_Z3v
-
+de=eth0 ; /sbin/ifconfig | grep ens3 && de=ens3
+##de=
+localport=1113
+remoteip=10.0.203.4
+remoteport=1113
 mode=udp
+#localip=10.0.203.1
+
+cname=p$localport.k
+
 
 ####iptables -F -t nat
 #default=0.0.0.0/0
 srcip=0.0.0.0/0
 
-localip=10.0.203.1
-localport=1113
 
-remoteip=10.0.203.4
-remoteport=1113
-
-
+#getlocalip
+echo $localip | grep . || localip=`/sbin/ifconfig "$de"|grep "inet " | awk -F '[:]' '{print $2}'  | awk -F '[ ]' '{print $1}'`
 
 
 pnum=`/sbin/iptables  -nvL -t nat  --line-numbers| awk '/PREROUTING/,/INPUT/{print}' |grep $cname|awk  '{print $1}'  `
 if [ ! -z $pnum ]
 then
-/sbin/iptables -t nat -D PREROUTING $pnum
+/sbin/iptables -t nat -D PREROUTING $pnum &
+
 fi
 
 rpnum=`/sbin/iptables  -nvL -t nat  --line-numbers|grep  -A 299 POSTROUTING |grep $cname|awk  '{print $1}'  `
 if [ ! -z $rpnum ]
 then
-/sbin/iptables -t nat -D POSTROUTING $rpnum
+/sbin/iptables -t nat -D POSTROUTING $rpnum &
 fi
 
 
@@ -38,6 +42,6 @@ fi
 echo finished del old iptables,wait 3s to add new one,or you can CTRL+C and make a new setting;
 sleep 3
 
-iptables -t nat -I PREROUTING -s  $srcip    -p  $mode --dport $localport        -m comment --comment "$cname"        -j DNAT --to-destination  $remoteip:$remoteport
-iptables -t nat -I POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport      -m comment --comment "$cname"     -j SNAT --to-source  $localip
+/sbin/iptables -t nat -I PREROUTING -s  $srcip    -p  $mode --dport $localport        -m comment --comment "$cname"        -j DNAT --to-destination  $remoteip:$remoteport
+/sbin/iptables -t nat -I POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport      -m comment --comment "$cname"     -j SNAT --to-source  $localip
 
