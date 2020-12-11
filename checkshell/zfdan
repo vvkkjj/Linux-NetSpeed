@@ -1,14 +1,23 @@
 #!/bin/bash
 #cname same can not be same!
-de=eth0 ; /sbin/ifconfig | grep ens3 && de=ens3
-##de=
-localport=1113
-remoteip=10.0.203.4
-remoteport=1113
+remoteip=1
+localport=201
+remoteport=$localport
+#remoteport=1113
 mode=udp
+
+#set localip yourself
 #localip=10.0.203.1
 
-cname=p$localport.k
+de=eth0
+/sbin/ifconfig | grep ens3 && de=ens3
+/sbin/ifconfig | grep ens5 && de=ens5
+#de=
+
+
+cname=p${localport}k
+chmod 755 /root/zf$localport &
+sleep 1
 
 
 ####iptables -F -t nat
@@ -34,14 +43,30 @@ then
 fi
 
 
+if echo $1 | grep s
+then
+echo del startup and stopped
+echo del startup and stopped
+sed -i "/zf$localport/d"  /etc/rc.local
+exit 0
+fi
+
 #/sbin/iptables -t nat -D PREROUTING -s  $srcip    -p  $mode --dport $localport   -m comment --comment "$cname"   -j DNAT --to-destination  $remoteip:$remoteport &
 #sleep 1
 #/sbin/iptables -t nat -D POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport    -m comment --comment "$cname"    -j SNAT --to-source  $localip &
 #sleep 1
-
+echo finished del old iptables,wait 3s to add new one,or you can CTRL+C and make a new setting;
+echo finished del old iptables,wait 3s to add new one,or you can CTRL+C and make a new setting;
 echo finished del old iptables,wait 3s to add new one,or you can CTRL+C and make a new setting;
 sleep 3
 
-/sbin/iptables -t nat -I PREROUTING -s  $srcip    -p  $mode --dport $localport        -m comment --comment "$cname"        -j DNAT --to-destination  $remoteip:$remoteport
-/sbin/iptables -t nat -I POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport      -m comment --comment "$cname"     -j SNAT --to-source  $localip
+/sbin/iptables -t nat -I PREROUTING -s  $srcip    -p  $mode --dport $localport        -m comment --comment "$cname"        -j DNAT --to-destination  $remoteip:$remoteport &
+sleep 1
+/sbin/iptables -t nat -I POSTROUTING -p  $mode  -d  $remoteip --dport   $remoteport      -m comment --comment "$cname"     -j SNAT --to-source  $localip &
+
+if ! cat /etc/rc.local | grep zf$localport
+then
+sed -i "/exit 0/i\/root/zf$localport &"  /etc/rc.local
+sed -i "/exit 0/i\sleep 6;date >/tmp/tmp_sl_log_zf$localport "  /etc/rc.local
+fi
 
